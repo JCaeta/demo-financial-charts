@@ -5,11 +5,10 @@ import styles from './CandlestickChart.module.scss';
 
 export const CandlestickChart = (props) => {
     const chartRef = useRef(null);
-    var created = false;
-    // var candlestickSeries = null;
     const [candlestickSeries, setCandlestickSeries] = useState(null) 
     var chart = null;
     const [data, setData] = useState(null)
+    const [title, setTitle] = useState('')
 
     useEffect(() => {
         createCandlestickChart();
@@ -17,7 +16,8 @@ export const CandlestickChart = (props) => {
 
     useEffect(() => {
         if(props.data !== null){
-            setData(props.data)
+            setData(props.data.data)
+            setTitle(props.data.title)
         }
     }, [props.data])
 
@@ -80,10 +80,11 @@ export const CandlestickChart = (props) => {
         //     { time: '2022-01-03', open: 60, high: 70, low: 50, close: 65 },
         //     // ...
         // ];
-  }
+    }
 
-  return (<>
+    return (<>
         {/* Use the chartRef to reference the chart element */}
+        <h3>{title}</h3>
         <div ref={chartRef} id="chart" className={styles.container}/>
     </>);
 };
